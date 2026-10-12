@@ -7,9 +7,9 @@
 
   const eventSelect=document.querySelector('[data-event-select]');
   document.querySelectorAll('[data-event]').forEach(link=>link.addEventListener('click',()=>{if(eventSelect) eventSelect.value=link.dataset.event||'';}));
-  const hasDate=document.querySelector('select[name="hasDate"]');
+  const hasDate=document.querySelector('select[name="tiene_fecha"]');
   const dateField=document.querySelector('[data-date-field]');
-  hasDate?.addEventListener('change',()=>{if(!dateField)return; const input=dateField.querySelector('input'); const hidden=hasDate.value==='no'; dateField.hidden=hidden; if(input) input.required=!hidden;});
+  hasDate?.addEventListener('change',()=>{if(!dateField)return; const input=dateField.querySelector('input'); const hidden=hasDate.value==='no'; dateField.hidden=hidden; if(input){input.required=!hidden;if(hidden)input.value='';}});
 
 
   const lightbox=document.querySelector('[data-lightbox]');
@@ -24,5 +24,43 @@
     en:{navAbout:'About',navEvents:'Events',navGallery:'Gallery',navCatalog:'Catalogues',clients:'CLIENTS',heroEyebrow:'Design, creation and production of your event · Peru',heroTitle:'Enjoy the experience.',heroSubtitle:'We take care of everything.',quoteUs:'Request a quote ↗',viewExperiences:'View experiences ↓',heroTypes:'Weddings · Corporate · Private · Youth',promise:'Complete production from start to finish',introTitle:'Your celebration deserves a production backed by experience.',introBody:'We turn ideas into experiences, shaping the concept, integrating the space, implementing every detail and managing the timing of your event.',quoteEvent:'Request a quote ↗',chooseExperience:'Choose your experience',celebrate:'What are we celebrating?',about:'About us',experienceTitle:'Our experience.',aboutBody:'JBD Producciones designs, creates, conceptualizes and produces events from start to finish. More than 10 years helping clients turn their dreams and vision into reality are our best introduction.',founderQuote:'“Your happiness and peace of mind are our passion.”',founderRole:'Founder of JBD Producciones',founderExperience:'leading and producing events',gallery:'Gallery',galleryTitle:'Explore our events.',catalog:'Catalogues',catalogTitle:'Looking to rent furniture, decoration, structures or a venue?',furniture:'Furniture',decoration:'Decoration',structures:'Structures',viewCatalog:'View catalogue ↗',visitWebsite:'Visit website ↗',quoteUsLabel:'Request a quote',dream:'Let’s make your dream a reality.',essential:'Tell us the essentials. Our team will contact you.',schedule:'Schedule a meeting',fullName:'Full name',namePlaceholder:'Your full name',hasDate:'Do you have a date?',yes:'Yes',no:'No',whichDate:'Which date?',eventType:'Event type',select:'Select',guests:'Number of guests',guestsPlaceholder:'Approximate number',email:'Email',budget:'Estimated budget (US$)',selectRange:'Select a range',notClear:'I am not sure yet',more:'Anything else you would like to tell us?',morePlaceholder:'Tell us what you have in mind',privacy:'I accept the privacy policy and contact regarding my request.',send:'Send request ↗',privacyLink:'Privacy',terms:'Terms',aiUse:'AI use',copyright:'© 2026 JBD Producciones · Event design, creation and production'},
     pt:{navAbout:'Sobre nós',navEvents:'Eventos',navGallery:'Galeria',navCatalog:'Catálogos',clients:'CLIENTES',heroEyebrow:'Design, criação e produção do seu evento · Peru',heroTitle:'Aproveite a experiência.',heroSubtitle:'Nós cuidamos de tudo.',quoteUs:'Solicite uma cotação ↗',viewExperiences:'Ver experiências ↓',heroTypes:'Casamentos · Corporativos · Particulares · Juvenis',promise:'Produção integral do início ao fim',introTitle:'Sua celebração merece uma produção à altura.',introBody:'Transformamos ideias em experiências, cuidando do conceito, integrando o espaço, implementando cada detalhe e gerenciando o timing do evento.',quoteEvent:'Solicite uma cotação ↗',chooseExperience:'Escolha sua experiência',celebrate:'O que vamos celebrar?',about:'Sobre nós',experienceTitle:'Nossa experiência.',aboutBody:'A JBD Producciones desenha, cria, conceitua e produz eventos do início ao fim. Mais de 10 anos acompanhando clientes para transformar sonhos e visão em realidade são nossa melhor apresentação.',founderQuote:'“Sua felicidade e tranquilidade são nossa paixão.”',founderRole:'Fundador da JBD Producciones',founderExperience:'liderando e produzindo eventos',gallery:'Galeria',galleryTitle:'Explore nossos eventos.',catalog:'Catálogos',catalogTitle:'Procura alugar móveis, decoração, estruturas ou espaço?',furniture:'Móveis',decoration:'Decoração',structures:'Estruturas',viewCatalog:'Ver catálogo ↗',visitWebsite:'Visitar site ↗',quoteUsLabel:'Solicite uma cotação',dream:'Vamos realizar seu sonho.',essential:'Conte-nos o essencial. Nossa equipe entrará em contato.',schedule:'Agendar uma reunião',fullName:'Nome completo',namePlaceholder:'Seu nome completo',hasDate:'Você tem uma data?',yes:'Sim',no:'Não',whichDate:'Qual?',eventType:'Tipo de evento',select:'Selecione',guests:'Número de convidados',guestsPlaceholder:'Número aproximado',email:'E-mail',budget:'Orçamento estimado (US$)',selectRange:'Selecione uma faixa',notClear:'Ainda não tenho certeza',more:'Tem algo mais para nos contar?',morePlaceholder:'Conte-nos o que você tem em mente',privacy:'Aceito a política de privacidade e o contato sobre minha solicitação.',send:'Enviar solicitação ↗',privacyLink:'Privacidade',terms:'Termos',aiUse:'Uso de IA',copyright:'© 2026 JBD Producciones · Design, criação e produção de eventos'}
   };
-  document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',()=>{const lang=button.dataset.lang||'es'; document.documentElement.lang=lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const value=translations[lang][el.dataset.i18n||'']; if(value)el.textContent=value;}); document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const value=translations[lang][el.dataset.i18nPlaceholder||'']; if(value)el.placeholder=value;}); const eventNames={es:['Matrimonios','Corporativos','Particulares','Juveniles'],en:['Weddings','Corporate','Private','Youth'],pt:['Casamentos','Corporativos','Particulares','Juvenis']}[lang]; document.querySelectorAll('[data-event-title]').forEach((el,index)=>el.textContent=eventNames[index]); document.querySelectorAll('[data-gallery-tab]').forEach((el,index)=>el.textContent=eventNames[index]); const optionNames=[...eventNames,lang==='en'?'Other':lang==='pt'?'Outro':'Otro']; document.querySelectorAll('[data-event-select] option:not(:first-child)').forEach((el,index)=>el.textContent=optionNames[index]); document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));}));
-  document.querySelector('[data-quote-form]')?.addEventListener('submit',e=>{e.preventDefault(); const form=e.currentTarget; if(!form.checkValidity()){form.reportValidity();return;} const status=form.querySelector('.form-status'); if(status)status.textContent='Solicitud lista para enviar. La integración con EventOS se conectará en la siguiente etapa.';});
+  document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',()=>{const lang=button.dataset.lang||'es'; document.documentElement.lang=lang; const languageField=document.querySelector('[data-form-language]'); if(languageField)languageField.value=lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const value=translations[lang][el.dataset.i18n||'']; if(value)el.textContent=value;}); document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const value=translations[lang][el.dataset.i18nPlaceholder||'']; if(value)el.placeholder=value;}); const eventNames={es:['Matrimonios','Corporativos','Particulares','Juveniles'],en:['Weddings','Corporate','Private','Youth'],pt:['Casamentos','Corporativos','Particulares','Juvenis']}[lang]; document.querySelectorAll('[data-event-title]').forEach((el,index)=>el.textContent=eventNames[index]); document.querySelectorAll('[data-gallery-tab]').forEach((el,index)=>el.textContent=eventNames[index]); const optionNames=[...eventNames,lang==='en'?'Other':lang==='pt'?'Outro':'Otro']; document.querySelectorAll('[data-event-select] option:not(:first-child)').forEach((el,index)=>el.textContent=optionNames[index]); document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));}));
+
+  const quoteForm=document.querySelector('[data-quote-form]');
+  const idempotencyField=document.querySelector('[data-idempotency-key]');
+  const newRequestId=()=>crypto.randomUUID?.()||'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16);});
+  if(idempotencyField)idempotencyField.value=newRequestId();
+  const formMessages={
+    es:{sending:'Enviando solicitud…',success:'Solicitud enviada. Pronto nos pondremos en contacto contigo.',error:'No pudimos enviar tu solicitud. Inténtalo nuevamente.',inactive:'El formulario estará disponible próximamente.'},
+    en:{sending:'Sending request…',success:'Request sent. We will contact you soon.',error:'We could not send your request. Please try again.',inactive:'The form will be available soon.'},
+    pt:{sending:'Enviando solicitação…',success:'Solicitação enviada. Entraremos em contato em breve.',error:'Não foi possível enviar sua solicitação. Tente novamente.',inactive:'O formulário estará disponível em breve.'}
+  };
+  quoteForm?.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const form=e.currentTarget;
+    if(!form.checkValidity()){form.reportValidity();return;}
+    const lang=document.documentElement.lang||'es';
+    const messages=formMessages[lang]||formMessages.es;
+    const status=form.querySelector('.form-status');
+    const button=form.querySelector('button[type="submit"]');
+    const endpoint=form.dataset.leadEndpoint?.trim();
+    if(!endpoint){if(status)status.textContent=messages.inactive;return;}
+    if(button)button.disabled=true;
+    if(status)status.textContent=messages.sending;
+    try{
+      const body=new URLSearchParams(new FormData(form));
+      const response=await fetch(endpoint,{method:'POST',body,redirect:'follow'});
+      const result=await response.json();
+      if(!response.ok||result.ok!==true)throw new Error('Submission rejected');
+      if(status)status.textContent=messages.success;
+      form.reset();
+      const languageField=form.querySelector('[data-form-language]');
+      if(languageField)languageField.value=lang;
+      const requestField=form.querySelector('[data-idempotency-key]');
+      if(requestField)requestField.value=newRequestId();
+      if(hasDate){hasDate.value='si';hasDate.dispatchEvent(new Event('change'));}
+    }catch(error){
+      console.error('No se pudo enviar el formulario',error);
+      if(status)status.textContent=messages.error;
+    }finally{if(button)button.disabled=false;}
+  });
