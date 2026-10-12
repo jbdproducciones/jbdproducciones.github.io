@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { getCountries, getCountryCallingCode } from 'libphonenumber-js/min';
+const eventTypes = ['Matrimonios', 'Corporativos', 'Particulares', 'Juveniles', 'Otro'];
+const photos = ['/images/hero.jpg','/images/corporativo.jpg','/images/mesas.jpg','/images/luces.jpg','/images/techo-luces.jpg','/images/estructura.jpg'];
+const countryCodes = [...new Set(getCountries().map(country => getCountryCallingCode(country)))].sort((a,b) => Number(a)-Number(b));
+---
+<BaseLayout title="JBD Producciones | Diseño y producción de eventos" description="Diseño, creación y producción integral de eventos en Perú.">
+  <Header />
+  <main>
+    <section class="hero" id="inicio" data-hero>
+      <div class="hero-content page-width">
+        <p class="eyebrow" data-i18n="heroEyebrow">Diseño, creación y producción de tu evento · Perú</p>
+        <h1 data-i18n="heroTitle">Disfruta de la experiencia.</h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">Nosotros nos encargamos.</p>
+        <div class="actions"><a class="button button-light" href="#cotiza" data-i18n="quoteUs">Cotiza con nosotros ↗</a><a class="button button-outline" href="#eventos" data-i18n="viewExperiences">Ver experiencias ↓</a></div>
+        <div class="hero-bottom"><p class="hero-types" data-i18n="heroTypes">Matrimonios · Corporativos · Particulares · Juveniles</p><div class="hero-dots" aria-label="Carrusel de fotografías">{photos.map((_,i)=><button type="button" data-slide={i} aria-label={`Fotografía ${i+1}`} aria-pressed={i===0}></button>)}</div></div>
+      </div>
+    </section>
+    <div class="promise" data-i18n="promise">Producción integral de principio a fin</div>
+
+    <section class="section intro page-width">
+      <p class="eyebrow dark">JBD Producciones</p><h2 data-i18n="introTitle">Sabemos que tu celebración merece una producción a su altura.</h2>
+      <p data-i18n="introBody">Convertimos ideas en experiencias, cuidando el concepto, integrando el espacio, implementando cada detalle y manejando el timing de tu evento.</p>
+      <a class="button button-dark" href="#cotiza" data-i18n="quoteEvent">Cotiza tu evento ↗</a>
+    </section>
+
+    <section class="section events" id="eventos"><div class="page-width">
+      <p class="eyebrow" data-i18n="chooseExperience">Elige tu experiencia</p><h2 data-i18n="celebrate">¿Qué vamos a celebrar?</h2>
+      <div class="event-grid">{eventTypes.slice(0,4).map((event,index)=><article class={`event-card event-${index+1}`}><h3 data-event-title={event}>{event}</h3><a href="#cotiza" data-event={event} data-i18n="quoteEvent">Cotiza tu evento ↗</a></article>)}</div>
+    </div></section>
+
+    <section class="section about" id="nosotros"><div class="page-width">
+      <p class="eyebrow" data-i18n="about">Nosotros</p><h2 data-i18n="experienceTitle">Nuestra experiencia.</h2>
+      <p class="about-copy" data-i18n="aboutBody">JBD Producciones diseña, crea, conceptualiza y produce eventos de principio a fin. Nuestros +10 años de experiencia acompañando a nuestros clientes para convertir su sueño y visión en realidad son nuestra mejor carta de presentación.</p>
+      <article class="founder"><div class="founder-photo-wrap"><img src="/images/javier-bambaren.jpg" alt="Javier Bambaren D." /><a class="linkedin" href="https://www.linkedin.com/in/javier-bambaren-dabdoub/?isSelfProfile=true" target="_blank" rel="noreferrer" aria-label="LinkedIn de Javier Bambaren">in</a></div><div><blockquote data-i18n="founderQuote">“Tu felicidad y tranquilidad es nuestra pasión.”</blockquote><h3>Javier Bambaren D.</h3><p data-i18n="founderRole">Fundador de JBD Producciones</p><p class="experience"><strong>+20 años</strong> <span data-i18n="founderExperience">liderando y produciendo eventos</span></p></div></article>
+    </div></section>
+
+    <section class="section gallery" id="galeria"><div class="page-width">
+      <p class="eyebrow dark" data-i18n="gallery">Galería</p><h2 data-i18n="galleryTitle">Explora nuestros eventos.</h2>
+      <div class="gallery-tabs">{eventTypes.slice(0,4).map((event,i)=><button type="button" data-gallery-tab={i} aria-pressed={i===0}>{event}</button>)}</div>
+      <div class="gallery-grid">{[0,1,2,3,4,5,0,2,3,4].map((photoIndex,i)=><button type="button" class="gallery-photo" data-gallery-photo={i} style={`background-image:url('${photos[photoIndex]}')`} aria-label={`Ampliar fotografía ${i+1}`}></button>)}</div>
+    </div></section>
+
+    <section class="section catalogs" id="catalogos"><div class="page-width">
+      <p class="eyebrow dark" data-i18n="catalog">Catálogos</p><h2 data-i18n="catalogTitle">¿Buscas alquilar mobiliario, decoración, estructuras o local?</h2>
+      <div class="catalog-grid"><article><img src="/images/mesas.jpg" alt="Mobiliario para eventos"/><h3 data-i18n="furniture">Mobiliario</h3><a href="#cotiza" data-i18n="viewCatalog">Ver catálogo ↗</a></article><article><img src="/images/hero.jpg" alt="Decoración para eventos"/><h3 data-i18n="decoration">Decoración</h3><a href="#cotiza" data-i18n="viewCatalog">Ver catálogo ↗</a></article><article><img src="/images/estructura.jpg" alt="Estructuras para eventos"/><h3 data-i18n="structures">Estructuras</h3><a href="#cotiza" data-i18n="viewCatalog">Ver catálogo ↗</a></article><article><img src="/images/techo-luces.jpg" alt="Fundo El Encanto"/><h3>Fundo El Encanto</h3><a href="#cotiza" data-i18n="visitWebsite">Visitar web ↗</a></article></div>
+    </div></section>
+
+    <section class="section quote" id="cotiza"><div class="page-width quote-grid">
+      <div><p class="eyebrow dark" data-i18n="quoteUsLabel">Cotiza con nosotros</p><h2 data-i18n="dream">Hagamos realidad tu sueño.</h2><p data-i18n="essential">Cuéntanos lo esencial. Nuestro equipo se pondrá en contacto contigo.</p><div class="direct-actions"><a class="button button-dark" href="https://calendly.com/jbdinvestmentcorp/45min" target="_blank" rel="noreferrer" data-i18n="schedule">Agendar una reunión</a><a class="button button-blue" href="https://wa.me/51970844182" target="_blank" rel="noreferrer">WhatsApp ↗</a></div></div>
+      <form class="quote-form" data-quote-form>
+        <label><span data-i18n="fullName">Nombre y apellido</span><input name="name" required placeholder="Tu nombre completo" data-i18n-placeholder="namePlaceholder" /></label>
+        <label><span data-i18n="hasDate">¿Tienes fecha?</span><select name="hasDate" required><option value="yes" data-i18n="yes">Sí</option><option value="no" data-i18n="no">No</option></select></label>
+        <label data-date-field><span data-i18n="whichDate">¿Cuál?</span><input type="date" name="date" required /></label>
+        <label><span data-i18n="eventType">Tipo de evento</span><select name="eventType" required data-event-select><option value="" data-i18n="select">Selecciona</option>{eventTypes.map(event=><option value={event}>{event}</option>)}</select></label>
+        <label><span data-i18n="guests">Cantidad de invitados</span><input type="number" name="guests" required placeholder="Número aproximado" data-i18n-placeholder="guestsPlaceholder" /></label>
+        <label><span>WhatsApp</span><span class="phone-control"><select name="callingCode" aria-label="Código internacional" data-country-code>{countryCodes.map(code => <option value={`+${code}`} selected={code === "51"}>+{code}</option>)}</select><input type="tel" name="phone" required placeholder="999 999 999" /></span></label>
+        <label><span data-i18n="email">Correo</span><input type="email" name="email" required placeholder="tu@correo.com" /></label>
+        <label><span data-i18n="budget">Presupuesto estimado (US$)</span><select name="budget" required><option value="" data-i18n="selectRange">Selecciona un rango</option><option>US$20,000–25,000</option><option>US$25,000–30,000</option><option>US$30,000–40,000</option><option>US$40,000–50,000</option><option>US$50,000+</option><option data-i18n="notClear">Aún no lo tengo claro</option></select></label>
+        <label class="full"><span data-i18n="more">¿Tienes algo más que contarnos?</span><textarea name="message" placeholder="Cuéntanos lo que tienes en mente" data-i18n-placeholder="morePlaceholder"></textarea></label>
+        <label class="consent full"><input type="checkbox" required /><span data-i18n="privacy">Acepto la política de privacidad y el contacto sobre mi solicitud.</span></label>
+        <button class="button button-blue full" type="submit" data-i18n="send">Enviar solicitud ↗</button>
+        <p class="form-status full" aria-live="polite"></p>
+      </form>
+    </div></section>
+  </main>
+
+  <footer><div class="social"><a href="https://www.instagram.com/jbdproducciones" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle class="dot" cx="17.4" cy="6.7" r="1"></circle></svg></a><a href="https://www.facebook.com/JBDproducciones" target="_blank" rel="noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 8.2V6.8c0-.7.5-.9 1-.9h2.5V2.2L14.3 2c-3.4 0-5.1 2-5.1 5.3v.9H6v4.3h3.2V22h5v-9.5h3.4l.6-4.3h-4z"></path></svg></a></div><nav aria-label="Documentos legales"><a href="/privacidad" data-i18n="privacyLink">Privacidad</a><a href="/terminos" data-i18n="terms">Términos</a><a href="/cookies">Cookies</a><a href="/uso-de-ia" data-i18n="aiUse">Uso de IA</a></nav><a href="mailto:baileyai@realitynear.org">baileyai@realitynear.org</a><p data-i18n="copyright">© 2026 JBD Producciones · Diseño, creación y producción de eventos</p></footer>
+
+  <dialog class="lightbox" data-lightbox><button type="button" data-lightbox-close aria-label="Cerrar">×</button><img src="/images/hero.jpg" alt="Fotografía ampliada de un evento JBD" data-lightbox-image /></dialog>
+</BaseLayout>
+
+<script is:inline src="/main.js"></script>
