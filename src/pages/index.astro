@@ -50,7 +50,7 @@ const countryCodes = [...new Set(getCountries().map(country => getCountryCalling
 
     <section class="section quote" id="cotiza"><div class="page-width quote-grid">
       <div><p class="eyebrow dark" data-i18n="quoteUsLabel">Cotiza con nosotros</p><h2 data-i18n="dream">Hagamos realidad tu sueño.</h2><p data-i18n="essential">Cuéntanos lo esencial. Nuestro equipo se pondrá en contacto contigo.</p><div class="direct-actions"><a class="button button-dark" href="https://calendly.com/jbdinvestmentcorp/45min" target="_blank" rel="noreferrer" data-i18n="schedule">Agendar una reunión</a><a class="button button-blue" href="https://wa.me/51970844182" target="_blank" rel="noreferrer">WhatsApp ↗</a></div></div>
-      <form class="quote-form" data-quote-form data-lead-endpoint="">
+      <form class="quote-form" data-quote-form data-lead-endpoint="https://script.google.com/macros/s/AKfycbxGFd0kbMJo9Js5NkQXQkrKMeaaNTKlYx2VICNEDrH9sLsthZwguJTWKUdlZIiKRrc/exec">
         <label><span data-i18n="fullName">Nombre y apellido</span><input name="nombre_completo" required maxlength="120" placeholder="Tu nombre completo" data-i18n-placeholder="namePlaceholder" /></label>
         <label><span data-i18n="hasDate">¿Tienes fecha?</span><select name="tiene_fecha" required><option value="si" data-i18n="yes">Sí</option><option value="no" data-i18n="no">No</option></select></label>
         <label data-date-field><span data-i18n="whichDate">¿Cuál?</span><input type="date" name="fecha_evento" required /></label>
